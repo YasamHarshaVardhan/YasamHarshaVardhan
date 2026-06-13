@@ -40,21 +40,54 @@ body{
     width:45%;
     padding:45px;
     border-radius:24px;
+    will-change:transform;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-    background:rgba(255,255,255,0.04);
-    backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+        0 20px 40px rgba(0,0,0,.3),
+        inset 0 1px 1px rgba(255,255,255,.15);
+
+    transform-style:preserve-3d;
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+
+    position:relative;
+    overflow:hidden;
+}
+.content::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        120deg,
+        rgba(255,255,255,.25),
+        transparent 40%
+    );
+
+    transform:translateX(-100%);
+    transition:.6s;
+    pointer-events:none;
+}
+
+.content:hover::before{
+    transform:translateX(100%);
 }
 
 .content h1{
     font-size:4rem;
-    color:#D4A373;
+    color:#53a1e1;
     margin-bottom:20px;
     transition:.3s;
+    position:relative;
+    z-index:2;
+    transform:translateZ(35px);
 }
 
 .content p{
@@ -62,6 +95,9 @@ body{
     line-height:1.9;
     color:#9CA3AF;
     transition:.3s;
+    position:relative;
+    z-index:2;
+    transform:translateZ(35px);
 }
 
 /* BUTTONS */
@@ -70,7 +106,11 @@ body{
     margin-top:30px;
     display:flex;
     gap:15px;
+    position:relative;
+    z-index:2;
+    transform:translateZ(35px);
 }
+
 
 .btn{
     padding:14px 30px;
@@ -82,7 +122,7 @@ body{
 }
 
 .primary{
-    background:#D4A373;
+    background:#53a1e1;
     color:#111827;
 }
 
@@ -116,7 +156,7 @@ body{
     justify-content:center;
     align-items:center;
 
-    border:2px solid rgba(212,163,115,0.4);
+    border:2px solid rgba(115, 149, 212, 0.4);
 
     background:rgba(255,255,255,.03);
 
@@ -130,7 +170,7 @@ body{
     border-radius:50%;
     overflow:hidden;
 
-    border:3px solid #D4A373;
+    border:3px solid #5390e1;
 
     animation:float 4s ease-in-out infinite;
 }
@@ -154,7 +194,7 @@ body{
 }
 
 .menu-item:hover{
-    color:#D4A373;
+    color:#53a1e1;
     transform:scale(1.1);
 }
 
@@ -356,12 +396,12 @@ text:"Email: YasamHarshaVardhan@example.com | Phone: +91 xxxxxxxxxx"
 
 github:{
 title:"GitHub",
-text:'<a href="https://github.com" target="_blank" style="color:#D4A373;text-decoration:none;">Visit GitHub Profile</a>'
+text:'<a href="https://github.com" target="_blank" style="color:#53a1e1;text-decoration:none;">Visit GitHub Profile</a>'
 },
 
 linkedin:{
 title:"LinkedIn",
-text:'<a href="https://linkedin.com" target="_blank" style="color:#D4A373;text-decoration:none;">Visit LinkedIn Profile</a>'
+text:'<a href="https://linkedin.com" target="_blank" style="color:#53a1e1;text-decoration:none;">Visit LinkedIn Profile</a>'
 }
 
 };
@@ -383,6 +423,51 @@ title.style.opacity="1";
 desc.style.opacity="1";
 
 },250);
+
+const card = document.querySelector(".content");
+
+card.addEventListener("mousemove",(e)=>{
+
+    const rect = card.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateY = (x - centerX) / 18;
+    const rotateX = -(y - centerY) / 18;
+
+    card.style.transform = `
+        perspective(1000px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        scale(1.03)
+    `;
+
+    const glowX = (x / rect.width) * 100;
+    const glowY = (y / rect.height) * 100;
+
+    card.style.background = `
+        radial-gradient(
+            circle at ${glowX}% ${glowY}%,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.05) 40%
+        )
+    `;
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+    card.style.transform =
+    "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+
+    card.style.background =
+    "rgba(255,255,255,0.05)";
+
+});
 
 }
 
