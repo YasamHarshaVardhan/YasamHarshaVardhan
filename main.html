@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#111827;
+    color:#F9FAFB;
+    overflow-x:hidden;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 8%;
+    gap:50px;
+}
+
+/* CONTENT */
+
+.content{
+    width:45%;
+    padding:45px;
+    border-radius:24px;
+
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+.content h1{
+    font-size:4rem;
+    color:#D4A373;
+    margin-bottom:20px;
+    transition:.3s;
+}
+
+.content p{
+    font-size:1.1rem;
+    line-height:1.9;
+    color:#9CA3AF;
+    transition:.3s;
+}
+
+/* BUTTONS */
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+}
+
+.btn{
+    padding:14px 30px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary{
+    background:#D4A373;
+    color:#111827;
+}
+
+.secondary{
+    background:transparent;
+    color:#F9FAFB;
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* CIRCLE */
+
+.circle-container{
+    width:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.outer-circle{
+    width:460px;
+    height:460px;
+    border-radius:50%;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:2px solid rgba(212,163,115,0.4);
+
+    background:rgba(255,255,255,.03);
+
+    box-shadow:
+    0 0 40px rgba(212,163,115,.08);
+}
+
+.inner-circle{
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    overflow:hidden;
+
+    border:3px solid #D4A373;
+
+    animation:float 4s ease-in-out infinite;
+}
+
+.inner-circle img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* MENU */
+
+.menu-item{
+    position:absolute;
+    text-decoration:none;
+    color:#E5E7EB;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.menu-item:hover{
+    color:#D4A373;
+    transform:scale(1.1);
+}
+
+/* POSITIONS */
+
+.top{
+    top:35px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.top-right{
+    top:85px;
+    right:50px;
+}
+
+.right{
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.bottom-right{
+    bottom:85px;
+    right:50px;
+}
+
+.bottom{
+    bottom:35px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.bottom-left{
+    bottom:85px;
+    left:50px;
+}
+
+.left{
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.top-left{
+    top:85px;
+    left:50px;
+}
+
+/* ANIMATION */
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+.hero{
+    flex-direction:column-reverse;
+    justify-content:center;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.content{
+    width:100%;
+}
+
+.content h1{
+    font-size:2.8rem;
+}
+
+.circle-container{
+    width:100%;
+}
+
+.outer-circle{
+    width:340px;
+    height:340px;
+}
+
+.inner-circle{
+    width:170px;
+    height:170px;
+}
+
+.menu-item{
+    font-size:11px;
+}
+
+.buttons{
+    justify-content:center;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="content">
+
+        <h1 id="title">About Me</h1>
+
+        <p id="description">
+            Hi, I'm Yasam Harsha Vardhan. A passionate web developer focused on building modern and responsive websites.
+        </p>
+
+        <div class="buttons">
+
+            <button class="btn primary">
+                Hire Me
+            </button>
+
+            <button class="btn secondary">
+                Download CV
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="circle-container">
+
+        <div class="outer-circle">
+
+            <a class="menu-item top" onclick="showContent('about')">About</a>
+
+            <a class="menu-item top-right" onclick="showContent('skills')">Skills</a>
+
+            <a class="menu-item right" onclick="showContent('education')">Education</a>
+
+            <a class="menu-item bottom-right" onclick="showContent('projects')">Projects</a>
+
+            <a class="menu-item bottom" onclick="showContent('certifications')">Certificates</a>
+
+            <a class="menu-item bottom-left" onclick="showContent('contact')">Contact</a>
+
+            <a class="menu-item left" onclick="showContent('github')">GitHub</a>
+
+            <a class="menu-item top-left" onclick="showContent('linkedin')">LinkedIn</a>
+
+            <div class="inner-circle">
+                <img src="https://t3.ftcdn.net/jpg/13/11/22/86/360_F_1311228699_YoiLc5aJ3RWz3uRfdEtlV0UYSQjqf7RW.jpg">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const portfolioData={
+
+about:{
+title:"About Me",
+text:"Hi, I'm Yasam Harsha Vardhan. A passionate Full Stack Developer focused on building modern, responsive and user-friendly web applications."
+},
+
+skills:{
+title:"Skills",
+text:"HTML, CSS, JavaScript, React.js, Node.js, Express.js, MongoDB, Python, Git and UI Design."
+},
+
+education:{
+title:"Education",
+text:"Bachelor of Technology in Computer Science with a strong foundation in software engineering and web development."
+},
+
+projects:{
+title:"Projects",
+text:"Portfolio Website, AI Chatbot, E-Commerce Website, Task Manager App and Learning Management System."
+},
+
+certifications:{
+title:"Certifications",
+text:"AWS Cloud Practitioner, Google UX Design, NPTEL Programming in Java and Responsive Web Design."
+},
+
+contact:{
+title:"Contact",
+text:"Email: YasamHarshaVardhan@example.com | Phone: +91 xxxxxxxxxx"
+},
+
+github:{
+title:"GitHub",
+text:'<a href="https://github.com" target="_blank" style="color:#D4A373;text-decoration:none;">Visit GitHub Profile</a>'
+},
+
+linkedin:{
+title:"LinkedIn",
+text:'<a href="https://linkedin.com" target="_blank" style="color:#D4A373;text-decoration:none;">Visit LinkedIn Profile</a>'
+}
+
+};
+
+function showContent(section){
+
+const title=document.getElementById("title");
+const desc=document.getElementById("description");
+
+title.style.opacity="0";
+desc.style.opacity="0";
+
+setTimeout(()=>{
+
+title.innerHTML=portfolioData[section].title;
+desc.innerHTML=portfolioData[section].text;
+
+title.style.opacity="1";
+desc.style.opacity="1";
+
+},250);
+
+}
+
+</script>
+
+</body>
+</html>
